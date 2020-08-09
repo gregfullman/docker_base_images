@@ -42,4 +42,12 @@ docker run -d \
   vladgh/minidlna
 ```
 
+### Providing a pre-built database
+
+Following the instructions here <https://openwrt.org/docs/guide-user/services/media_server/minidlna>, you can pre-build your MiniDLNA database, minimizing the work required by your MiniDLNA host (e.g. low-powered ARM device).
+By specifying MINIDLNA_DB_DIR and MINIDLNA_INOTIFY, MiniDLNA will be pointed to the pre-built database and ignore file changes triggering a database rebuild.
+```
+docker run -d --net=host -v /mnt/data/Music:/mnt/data/Music -v /mnt/data/minidlna:/mnt/data/minidlna -e MINIDLNA_MEDIA_DIR_1=A,/mnt/data/Music -e MINIDLNA_DB_DIR=/mnt/data/minidlna -e MINIDLNA_INOTIFY=no greg7fullman/minidlna:latest
+```
+
 See: <http://manpages.ubuntu.com/manpages/raring/man5/minidlna.conf.5.html>
